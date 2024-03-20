@@ -31,7 +31,34 @@ If you want to contribute to shapes, submit a pull request.
 - url: `https://github.com/OPCODE-Open-Spring-Fest/shapes/compare/branch...YOURGITHUBUSERNAME:shapes:BRANCH?quick_pull=1&template=pr.md`
   
 ### Requirements
+    To run *shapes*, you need the following requirements:
+
+- [Node.js](https://nodejs.org/)
 
 
 ### Setup
 
+To set up *shapes* on your local machine, follow these steps:
+
+## Installation Steps
+
+1. Fork the repository:
+   - Click the "Fork" button at the top right corner of this repository's page on GitHub. This will create a copy of the repository in your GitHub account.
+
+2. Clone the forked repository:
+
+```bash
+git clone https://github.com/<yourusername>/shapes.git
+```
+
+
+3. Navigate to the project directory:
+```bash
+cd shapes
+```
+
+4. Install Node.js dependencies:
+```bash
+npm i
+```
+Congratulations! You have successfully set up *shapes* on your machine.
