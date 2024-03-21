@@ -1,8 +1,46 @@
-# About the project
+# SHAPES
 
-"Shapes" revolutionizes the study and interaction with geometric shapes by offering a unique and intuitive approach to learning. Users can easily identify shapes by simply entering the number of sides, providing an instant and accurate name for the shape. Conversely, users can input a shape's name to reveal its corresponding number of sides, enhancing their understanding of shape properties and classifications.
+## Introduction ✨
 
-Beyond shape identification, "Shapes" provides a dynamic platform for exploring geometry through area calculations. Users can input the dimensions of various shapes, and the tool calculates the area, offering a practical and hands-on way to comprehend geometric concepts. Additionally, the tool allows users to interactively manipulate angles, providing a visual representation of angle properties and relationships.
+"Shapes" revolutionizes the study and interaction with geometric shapes by offering a unique and intuitive approach to learning. Users can easily identify shapes by simply entering the number of sides, providing an instant and accurate name for the shape.
 
-The interactive nature of "Shapes" makes learning geometry engaging and immersive. Whether for educational purposes or personal exploration, users can benefit from a platform that not only educates but also encourages curiosity and discovery. "Shapes" is not just a tool for learning geometry; it is a gateway to a deeper understanding and appreciation of the world of shapes and angles.
+## Technologies Used 🧑‍💻
 
+- Solidity
+
+## Contact 📱
+
+If you have any questions or feedback, please reach out to us at shobhit.2201140ec@iiitbh.ac.in 📧
+
+### Setup
+
+To set up **shapes** on your local machine, follow these steps:
+
+1. Fork the repository:
+
+   - Click the "Fork" button at the top right corner of this repository's page on GitHub. This will create a copy of the repository in your GitHub account.
+
+2. Clone the forked repository:
+
+```bash
+git clone https://github.com/<yourusername>/shapes.git
+```
+
+3. Navigate to the project directory:
+
+```bash
+cd shapes
+```
+
+4. Install Node.js dependencies(make sure node is installed on your laptop):
+
+```bash
+npm i
+```
+5.  Open the contract folder and copy all the contents of the shapes.sol file and paste it on remix (or you can use VS Code but     remix ide is recommended). Remix ide(link) : http://lnkiy.in/Remix_ide
+6.  Create a new branch for your feature or bug fix.
+7.  Make your changes and commit them.
+8.  Push to the branch.
+9.  Submit a pull request with the issue number.
+
+You are good to go to make your contribution!! All the best.
