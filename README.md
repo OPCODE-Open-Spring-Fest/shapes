@@ -43,4 +43,4 @@ npm i
 8.  Push to the branch.
 9.  Submit a pull request with the issue number.
 
-You are good to go to make your contribution!! All the best.
+You are good to go to make your contribution!! All the best!.
