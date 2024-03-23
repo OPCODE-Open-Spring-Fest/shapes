@@ -1,6 +1,6 @@
 # Project Tour
 
-In the 'Contracts' folder, you'll find a single file with a '.sol' extension. This file is where you should make all your changes. Simply open this file to access the contract code and update it as needed. If you have any questions or need assistance with the changes, feel free to ask!.
+In the 'Contracts' folder, you'll find a single file with a '.sol' extension. This file is where you should make all your changes. Simply open this file to access the contract code and update it as needed. If you have any questions or need assistance with the changes, feel free to ask!.
 
 ```bash
 |   .gitignore
@@ -11,13 +11,11 @@ In the 'Contracts' folder, you'll find a single file with a '.sol' extension. Th
 |   README.md
 |   
 +---.github
-|   |   pull_request_template.md
-|   |   
 |   +---Contributor_Guide
 |   |       commiting.md
 |   |       Contributing.md
 |   |       Project_Tour.md
-|   |
+|   |       
 |   +---ISSUE_TEMPLATE
 |   |       bug_report.yaml
 |   |       feature_request.yaml
@@ -26,9 +24,7 @@ In the 'Contracts' folder, you'll find a single file with a '.sol' extension. Th
 |   |       pr.md
 |   |
 |   \---workflows
-|           checklabels.yaml
 |           commitlint.yaml
-|           label-checker.js
 |           prmerged.yaml
 |
 +---.husky
@@ -37,4 +33,7 @@ In the 'Contracts' folder, you'll find a single file with a '.sol' extension. Th
 |
 \---contracts
         shapes.sol
+
 ```
+#Tech stack :
+Solidity
