@@ -40,7 +40,7 @@ contract shapes{
          require(found!=0,"Invalid shape");
         _;
     }
-    modifier isPositive(uint side1, uint side2, uint side3){
+    modifier isPositive(int side1, int side2, int side3){
         require(side1 >0 && side2 > 0 && side3 > 0, "Invalid Input");
         _;
     }
@@ -49,7 +49,7 @@ contract shapes{
         return shape_number[s];
     }
 
-    function isTriangle(uint side1, uint side2, uint side3) public pure isPositive(side1, side2, side3) returns (bool) {
+    function isTriangle(int side1, int side2, int side3) public pure isPositive(side1, side2, side3) returns (bool) {
         return (((side1 + side2 > side3) && (side1 + side3 > side2) && (side2 + side3 > side1))) ? true : false;
         }
 }
