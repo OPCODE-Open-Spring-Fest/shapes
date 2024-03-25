@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 contract shapes{
     // 1<=n<=10
@@ -40,7 +40,16 @@ contract shapes{
          require(found!=0,"Invalid shape");
         _;
     }
-    function number_of_sides(string calldata s) external check(s) returns (uint){
+    modifier isPositive(uint side1, uint side2, uint side3){
+        require(side1 >0 && side2 > 0 && side3 > 0, "Invalid Input");
+        _;
+    }
+
+    function number_of_sides(string calldata s) external view check(s) returns (uint){
         return shape_number[s];
     }
+
+    function isTriangle(uint side1, uint side2, uint side3) public pure isPositive(side1, side2, side3) returns (bool) {
+        return (((side1 + side2 > side3) && (side1 + side3 > side2) && (side2 + side3 > side1))) ? true : false;
+        }
 }
