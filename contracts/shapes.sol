@@ -54,6 +54,12 @@ contract shapes{
         _;
     }
 
+    modifier shapeChecker(string memory shape){
+        bool isPresent = (shape_number[shape] == 0)? false:true;
+        require(isPresent, "Input valid shape with 10 or less sides");
+        _;
+    }
+
     function number_of_sides(string calldata s) external view check(s) returns (uint){
         return shape_number[s];
     }
@@ -80,4 +86,9 @@ contract shapes{
     function chechShape(uint sides) public view sidesLimit(sides) returns(string memory){
         return name[sides-1];
     }
+
+    function equal(uint sides, string memory shape) public view sidesLimit(sides) shapeChecker(shape) returns (bool){
+        return (sides == shape_number[shape])? true:false;
+    }
+}
 }
