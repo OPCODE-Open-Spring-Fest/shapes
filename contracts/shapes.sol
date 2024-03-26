@@ -49,6 +49,11 @@ contract shapes{
         require(side1 > 0 && side2 > 0 && side3 > 0 && side4 > 0, "Invalid Input");
         _;
     }
+    modifier sidesLimit(uint sides){
+        require(sides<11, "Input should not exceed 10");
+        _;
+    }
+
     function number_of_sides(string calldata s) external view check(s) returns (uint){
         return shape_number[s];
     }
@@ -70,5 +75,9 @@ contract shapes{
         if(side1 == side2 && side2 == side3) return "Equilateral";
         else if(side1 != side2 && side2 != side3 && side1 != side3) return "Scalene";
         else return "Isosceles";
+    }
+
+    function chechShape(uint sides) public view sidesLimit(sides) returns(string memory){
+        return name[sides-1];
     }
 }
