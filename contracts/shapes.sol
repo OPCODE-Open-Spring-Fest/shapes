@@ -62,7 +62,6 @@ contract shapes{
     }
 
     function isSquare(int side1, int side2, int side3, int side4) public pure isPositive4(side1, side2, side3, side4) returns (bool){
-       require(isRectangle(side1, side2, side3, side4), "not even a rectangle");
        return (side1 == side2 && side2 == side3 && side3 == side4) ? true : false;
     }
 }
