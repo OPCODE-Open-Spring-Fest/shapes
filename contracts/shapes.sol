@@ -64,4 +64,11 @@ contract shapes{
     function isSquare(int side1, int side2, int side3, int side4) public pure isPositive4(side1, side2, side3, side4) returns (bool){
        return (side1 == side2 && side2 == side3 && side3 == side4) ? true : false;
     }
+    
+    function whichTriangle(int side1, int side2, int side3) public pure returns(string memory){
+        require(isTriangle(side1, side2, side3), "not a triangle");
+        if(side1 == side2 && side2 == side3) return "Equilateral";
+        else if(side1 != side2 && side2 != side3 && side1 != side3) return "Scalene";
+        else return "Isosceles";
+    }
 }
