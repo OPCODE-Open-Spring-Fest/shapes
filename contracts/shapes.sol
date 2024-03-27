@@ -40,16 +40,28 @@ contract shapes{
          require(found!=0,"Invalid shape");
         _;
     }
-    modifier isPositive(int side1, int side2, int side3){
+    modifier isPositive3(int side1, int side2, int side3){
         require(side1 >0 && side2 > 0 && side3 > 0, "Invalid Input");
         _;
     }
 
+    modifier isPositive4(int side1, int side2, int side3, int side4){
+        require(side1 > 0 && side2 > 0 && side3 > 0 && side4 > 0, "Invalid Input");
+        _;
+    }
     function number_of_sides(string calldata s) external view check(s) returns (uint){
         return shape_number[s];
     }
 
-    function isTriangle(int side1, int side2, int side3) public pure isPositive(side1, side2, side3) returns (bool) {
+    function isTriangle(int side1, int side2, int side3) public pure isPositive3(side1, side2, side3) returns (bool) {
         return (((side1 + side2 > side3) && (side1 + side3 > side2) && (side2 + side3 > side1))) ? true : false;
         }
+
+    function isRectangle(int side1, int side2, int side3, int side4) public pure isPositive4(side1, side2, side3, side4) returns (bool){
+
+    }
+
+    function isSquare(int side1, int side2, int side3, int side4) public pure isPositive4(side1, side2, side3, side4) returns (bool){
+       return (side1 == side2 && side2 == side3 && side3 == side4) ? true : false;
+    }
 }
