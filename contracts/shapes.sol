@@ -51,7 +51,7 @@ contract shapes{
     }
 
     modifier sidesLimit(uint sides){
-        require(sides>0 && sides<11, "Input should lie in [0, 10]");
+        require(sides>0 && sides<11, "Input should lie in (0, 10]");
         _;
     }
     function number_of_sides(string calldata s) external view check(s) returns (uint){
