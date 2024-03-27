@@ -57,8 +57,8 @@ contract shapes{
         return (((side1 + side2 > side3) && (side1 + side3 > side2) && (side2 + side3 > side1))) ? true : false;
         }
 
-    function isRectangle(int side1, int side2, int side3, int side4) public pure isPositive4(side1, side2, side3, side4) returns (bool){
-
+    function isRectangle(int side1, int side2, int side3, int side4) public pure isPositive4(side1, side2, side3, side4) returns(bool){
+        return (side1 == side3 && side2 == side4)||(side1 == side2 && side3 == side4)||(side1 == side4 && side2 == side3);
     }
 
     function isSquare(int side1, int side2, int side3, int side4) public pure isPositive4(side1, side2, side3, side4) returns (bool){
