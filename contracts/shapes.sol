@@ -5,6 +5,7 @@ contract shapes{
     // If you want to compare two strings simply use the function compareStrings() which is already created which returns bool 
 
     mapping(string => uint ) shape_number;
+    mapping(uint => uint) interior_angle;
     string [] name=["point","line","triangle","quadrilateral","pentagon","hexagon","heptagon","octagon","nonagon","decagon"];
     
     
@@ -19,6 +20,7 @@ contract shapes{
          shape_number["octagon"]=8;
          shape_number["nonagon"]=9;
          shape_number["decagon"]=10;
+
     }
 
 
@@ -54,6 +56,12 @@ contract shapes{
         require(sides>0 && sides<11, "Input should lie in (0, 10]");
         _;
     }
+    
+    modifier sidesLimitAngle(uint sides){
+        require(sides>2 && sides<11, "Input should lie in (2, 10]");
+        _;
+    }
+    
     modifier shapeChecker(string memory shape){
         bool isPresent = (shape_number[shape] == 0)? false:true;
         require(isPresent, "Input valid shape with 10 or less sides");
@@ -90,4 +98,9 @@ contract shapes{
     function equal(uint sides, string memory shape) public view sidesLimit(sides) shapeChecker(shape) returns (bool){
         return (sides == shape_number[shape])? true:false;
     }
+     function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
+        return (sides - 2) * 180 / sides;
+    }
+       
 }
+
