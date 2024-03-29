@@ -21,14 +21,6 @@ contract shapes{
          shape_number["nonagon"]=9;
          shape_number["decagon"]=10;
 
-        interior_angle[3]=60;
-        interior_angle[4]=90;
-        interior_angle[5]=108;
-        interior_angle[6]=120;
-        interior_angle[7]=128;
-        interior_angle[8]=135;
-        interior_angle[9]=140;
-        interior_angle[10]=144;
     }
 
 
@@ -117,7 +109,8 @@ contract shapes{
     function equal(uint sides, string memory shape) public view sidesLimit(sides) shapeChecker(shape) returns (bool){
         return (sides == shape_number[shape])? true:false;
     }
-     function interiorAngle(uint sides) public view sidesLimitAngle(sides) returns(uint){
+
+    function interiorAngle(uint sides) public view sidesLimitAngle(sides) returns(uint){
         return interior_angle[sides];
     }
 
