@@ -101,6 +101,10 @@ contract shapes{
         else return "Isosceles";
     }
 
+    function checkShape(uint sides) public view sidesLimit(sides) returns(string memory){
+    return name[sides-1];
+    }
+
     function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
         return (sides - 2) * 180 / sides;
     }
