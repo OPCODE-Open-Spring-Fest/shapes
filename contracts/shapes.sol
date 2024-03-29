@@ -66,7 +66,12 @@ contract shapes{
         require(sides>0 && sides<11, "Input should lie in (0, 10]");
         _;
     }
-    
+
+     modifier shapeArrayLimit(string[] memory shapeArray){
+        require(shapeArray.length > 0 && shapeArray.length <= 10, "Number of shapes must lie in [1,10]");
+        _;
+    }   
+
     modifier sidesLimitAngle(uint sides){
         require(sides>2 && sides<11, "Input should lie in (2, 10]");
         _;
@@ -75,6 +80,16 @@ contract shapes{
     modifier shapeChecker(string memory shape){
         bool isPresent = (shape_number[shape] == 0)? false:true;
         require(isPresent, "Input valid shape with 10 or less sides");
+        _;
+    }
+
+    modifier shapeArrayChecker(string[] memory shapeArray){
+        bool areAllPresent = true;
+        for(uint i=0; i<shapeArray.length; i++){
+            areAllPresent = (shape_number[shapeArray[i]] == 0)? false:true;
+            if(!areAllPresent) break;
+        }
+        require(areAllPresent, "Invalid shape");
         _;
     }
 
@@ -127,6 +142,30 @@ contract shapes{
 
     function volumeCuboid(int height, int width, int depth) public pure isPositive3(height, width, depth) returns(uint){
         return uint(height * width * depth); 
+    }
+
+    function sortShapes(string[] memory inputShapes) public view shapeArrayChecker(inputShapes) shapeArrayLimit(inputShapes) returns(string[] memory){
+        uint[] memory sortedShapeSides = new uint[](inputShapes.length);
+        string[] memory sortedShapes = new string[](inputShapes.length);
+
+        for(uint i=0; i<inputShapes.length; ++i){
+            sortedShapeSides[i] = shape_number[inputShapes[i]];
+        }    
+        for(uint i=0; i<=sortedShapeSides.length; ++i){
+            uint maxIndex = i;
+            for(uint j=i; j<sortedShapeSides.length; ++j){
+                if(sortedShapeSides[j]>sortedShapeSides[maxIndex]){
+                    uint store = sortedShapeSides[maxIndex];
+                    sortedShapeSides[maxIndex] = sortedShapeSides[j];
+                    sortedShapeSides[j] = store;
+                }
+            }
+        
+        }
+        for(uint i=0; i<sortedShapeSides.length; ++i){
+            sortedShapes[i] = name[sortedShapeSides[i] -1];
+        }
+        return sortedShapes;
     }
 }
 
