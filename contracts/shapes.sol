@@ -141,7 +141,7 @@ contract shapes{
     }      
 
     function volumeCube(uint side)public pure isPositive1(side) returns(uint){
-        return side ** 2;
+        return side ** 3;
     }   
 
     function volumeCuboid(int height, int width, int depth) public pure isPositive3(height, width, depth) returns(uint){
