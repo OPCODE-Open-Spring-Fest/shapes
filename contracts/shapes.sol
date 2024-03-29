@@ -50,6 +50,17 @@ contract shapes{
          require(found!=0,"Invalid shape");
         _;
     }
+
+    modifier isPositive1(uint side){
+        require(side>0);
+        _;
+    }
+
+    modifier isPositive2(uint side1, uint side2){
+        require(side1 >0 && side2 > 0, "Invalid Input");
+        _;
+    }
+
     modifier isPositive3(int side1, int side2, int side3){
         require(side1 >0 && side2 > 0 && side3 > 0, "Invalid Input");
         _;
@@ -109,6 +120,20 @@ contract shapes{
      function interiorAngle(uint sides) public view sidesLimitAngle(sides) returns(uint){
         return interior_angle[sides];
     }
-       
+
+    function areaTriangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
+    uint area =   base * height * 1 / 2;
+    return area;
+    }
+
+    function areaRectangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
+    uint area =   base * height;
+    return area;
+    }
+
+    function areaSquare(uint side)public pure isPositive1(side) returns(uint){
+        return uint(side ** 2);
+
+    }      
 }
 
