@@ -120,6 +120,10 @@ contract shapes{
         return (sides - 2) * 180 / sides;
     }
 
+    function checkShape(uint sides) public view sidesLimit(sides) returns(string memory){
+        return name[sides-1];
+    }
+
     function equal(uint sides, string memory shape) public view sidesLimit(sides) shapeChecker(shape) returns (bool){
         return (sides == shape_number[shape])? true:false;
     }
