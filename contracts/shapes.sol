@@ -5,7 +5,6 @@ contract shapes{
     // If you want to compare two strings simply use the function compareStrings() which is already created which returns bool 
 
     mapping(string => uint ) shape_number;
-    mapping(uint => uint) interior_angle;
     string [] name=["point","line","triangle","quadrilateral","pentagon","hexagon","heptagon","octagon","nonagon","decagon"];
     
     
@@ -44,7 +43,7 @@ contract shapes{
     }
 
     modifier isPositive1(uint side){
-        require(side>0);
+        require(side>0, "Invalid Input");
         _;
     }
 
@@ -85,7 +84,7 @@ contract shapes{
 
     function isTriangle(int side1, int side2, int side3) public pure isPositive3(side1, side2, side3) returns (bool) {
         return (((side1 + side2 > side3) && (side1 + side3 > side2) && (side2 + side3 > side1))) ? true : false;
-        }
+    }
 
     function isRectangle(int side1, int side2, int side3, int side4) public pure isPositive4(side1, side2, side3, side4) returns(bool){
         return (side1 == side3 && side2 == side4)||(side1 == side2 && side3 == side4)||(side1 == side4 && side2 == side3);
@@ -102,31 +101,32 @@ contract shapes{
         else return "Isosceles";
     }
 
-    function checkShape(uint sides) public view sidesLimit(sides) returns(string memory){
-    return name[sides-1];
+    function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
+        return (sides - 2) * 180 / sides;
     }
 
     function equal(uint sides, string memory shape) public view sidesLimit(sides) shapeChecker(shape) returns (bool){
         return (sides == shape_number[shape])? true:false;
     }
 
-    function interiorAngle(uint sides) public view sidesLimitAngle(sides) returns(uint){
-        return interior_angle[sides];
-    }
-
     function areaTriangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
-    uint area =   base * height * 1 / 2;
-    return area;
+        return base * height * 1 / 2;
     }
 
     function areaRectangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
-    uint area =   base * height;
-    return area;
+        return base * height;
     }
 
     function areaSquare(uint side)public pure isPositive1(side) returns(uint){
         return uint(side ** 2);
-
     }      
+
+    function volumeCube(uint side)public pure isPositive1(side) returns(uint){
+        return side ** 2;
+    }   
+
+    function volumeCuboid(int height, int width, int depth) public pure isPositive3(height, width, depth) returns(uint){
+        return uint(height * width * depth); 
+    }
 }
 
