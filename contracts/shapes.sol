@@ -98,7 +98,7 @@ contract shapes{
     function equal(uint sides, string memory shape) public view sidesLimit(sides) shapeChecker(shape) returns (bool){
         return (sides == shape_number[shape])? true:false;
     }
-     function interiorAngle(uint sides) public view sidesLimitAngle(sides) returns(uint){
+     function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
         return (sides - 2) * 180 / sides;
     }
        
