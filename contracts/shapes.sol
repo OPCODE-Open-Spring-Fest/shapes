@@ -5,7 +5,6 @@ contract shapes{
     // If you want to compare two strings simply use the function compareStrings() which is already created which returns bool 
 
     mapping(string => uint ) shape_number;
-    mapping(uint => uint) interior_angle;
     string [] name=["point","line","triangle","quadrilateral","pentagon","hexagon","heptagon","octagon","nonagon","decagon"];
     
     
@@ -111,7 +110,7 @@ contract shapes{
     }
 
     function interiorAngle(uint sides) public view sidesLimitAngle(sides) returns(uint){
-        return interior_angle[sides];
+        return (sides - 2) * 180 / sides;
     }
 
     function areaTriangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
