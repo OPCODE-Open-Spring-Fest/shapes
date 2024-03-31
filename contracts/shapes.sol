@@ -5,7 +5,6 @@ contract shapes{
     // If you want to compare two strings simply use the function compareStrings() which is already created which returns bool 
 
     mapping(string => uint ) shape_number;
-    mapping(uint => uint) interior_angle;
     string [] name=["point","line","triangle","quadrilateral","pentagon","hexagon","heptagon","octagon","nonagon","decagon"];
     
     
@@ -42,6 +41,17 @@ contract shapes{
          require(found!=0,"Invalid shape");
         _;
     }
+
+    modifier isPositive1(uint side){
+        require(side>0);
+        _;
+    }
+
+    modifier isPositive2(uint side1, uint side2){
+        require(side1 >0 && side2 > 0, "Invalid Input");
+        _;
+    }
+
     modifier isPositive3(int side1, int side2, int side3){
         require(side1 >0 && side2 > 0 && side3 > 0, "Invalid Input");
         _;
@@ -98,9 +108,27 @@ contract shapes{
     function equal(uint sides, string memory shape) public view sidesLimit(sides) shapeChecker(shape) returns (bool){
         return (sides == shape_number[shape])? true:false;
     }
-     function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
+
+
+    function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
         return (sides - 2) * 180 / sides;
     }
-       
+
+    function areaTriangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
+    uint area =   base * height * 1 / 2;
+    return area;
+    }
+
+    
+
+    function areaRectangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
+    uint area =   base * height;
+    return area;
+    }
+
+    function areaSquare(uint side)public pure isPositive1(side) returns(uint){
+        return uint(side ** 2);
+
+    }      
 }
 
