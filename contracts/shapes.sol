@@ -109,7 +109,8 @@ contract shapes{
         return (sides == shape_number[shape])? true:false;
     }
 
-    function interiorAngle(uint sides) public view sidesLimitAngle(sides) returns(uint){
+
+    function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
         return (sides - 2) * 180 / sides;
     }
 
@@ -117,6 +118,8 @@ contract shapes{
     uint area =   base * height * 1 / 2;
     return area;
     }
+
+    
 
     function areaRectangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
     uint area =   base * height;
