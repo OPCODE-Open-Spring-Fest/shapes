@@ -43,7 +43,7 @@ contract shapes{
     }
 
     modifier isPositive1(uint side){
-        require(side>0);
+        require(side>0, "Invalid Input");
         _;
     }
 
@@ -66,7 +66,12 @@ contract shapes{
         require(sides>0 && sides<11, "Input should lie in (0, 10]");
         _;
     }
-    
+
+     modifier shapeArrayLimit(string[] memory shapeArray){
+        require(shapeArray.length > 0 && shapeArray.length <= 10, "Number of shapes must lie in [1,10]");
+        _;
+    }   
+
     modifier sidesLimitAngle(uint sides){
         require(sides>2 && sides<11, "Input should lie in (2, 10]");
         _;
@@ -78,13 +83,23 @@ contract shapes{
         _;
     }
 
+    modifier shapeArrayChecker(string[] memory shapeArray){
+        bool areAllPresent = true;
+        for(uint i=0; i<shapeArray.length; i++){
+            areAllPresent = (shape_number[shapeArray[i]] == 0)? false:true;
+            if(!areAllPresent) break;
+        }
+        require(areAllPresent, "Invalid shape");
+        _;
+    }
+
     function number_of_sides(string calldata s) external view check(s) returns (uint){
         return shape_number[s];
     }
 
     function isTriangle(int side1, int side2, int side3) public pure isPositive3(side1, side2, side3) returns (bool) {
         return (((side1 + side2 > side3) && (side1 + side3 > side2) && (side2 + side3 > side1))) ? true : false;
-        }
+    }
 
     function isRectangle(int side1, int side2, int side3, int side4) public pure isPositive4(side1, side2, side3, side4) returns(bool){
         return (side1 == side3 && side2 == side4)||(side1 == side2 && side3 == side4)||(side1 == side4 && side2 == side3);
@@ -101,8 +116,12 @@ contract shapes{
         else return "Isosceles";
     }
 
+    function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
+        return (sides - 2) * 180 / sides;
+    }
+
     function checkShape(uint sides) public view sidesLimit(sides) returns(string memory){
-    return name[sides-1];
+        return name[sides-1];
     }
 
     function equal(uint sides, string memory shape) public view sidesLimit(sides) shapeChecker(shape) returns (bool){
@@ -110,25 +129,50 @@ contract shapes{
     }
 
 
+
     function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
         return (sides - 2) * 180 / sides;
     }
 
+
     function areaTriangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
-    uint area =   base * height * 1 / 2;
-    return area;
+        return base * height * 1 / 2;
     }
 
     
 
     function areaRectangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
-    uint area =   base * height;
-    return area;
+        return base * height;
     }
 
     function areaSquare(uint side)public pure isPositive1(side) returns(uint){
         return uint(side ** 2);
-
     }      
+
+  
+
+    function sortShapes(string[] memory inputShapes) public view shapeArrayChecker(inputShapes) shapeArrayLimit(inputShapes) returns(string[] memory){
+        uint[] memory sortedShapeSides = new uint[](inputShapes.length);
+        string[] memory sortedShapes = new string[](inputShapes.length);
+
+        for(uint i=0; i<inputShapes.length; ++i){
+            sortedShapeSides[i] = shape_number[inputShapes[i]];
+        }    
+        for(uint i=0; i<=sortedShapeSides.length; ++i){
+            uint maxIndex = i;
+            for(uint j=i; j<sortedShapeSides.length; ++j){
+                if(sortedShapeSides[j]>sortedShapeSides[maxIndex]){
+                    uint store = sortedShapeSides[maxIndex];
+                    sortedShapeSides[maxIndex] = sortedShapeSides[j];
+                    sortedShapeSides[j] = store;
+                }
+            }
+        
+        }
+        for(uint i=0; i<sortedShapeSides.length; ++i){
+            sortedShapes[i] = name[sortedShapeSides[i] -1];
+        }
+        return sortedShapes;
+    }
 }
 
