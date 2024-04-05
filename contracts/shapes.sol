@@ -147,6 +147,14 @@ contract shapes{
     function volumeCuboid(int height, int width, int depth) public pure isPositive3(height, width, depth) returns(uint){
         return uint(height * width * depth); 
     }
+    
+    function surfaceCube(uint side) public pure isPositive1(side) returns(uint){
+        return 6 * (side**2);
+    }
+
+    function surfaceCuboid(int height, int width, int depth) public pure isPositive3(height, width, depth) returns(uint){
+        return uint(2 * (height * width + height * depth + width * depth));
+    }
 
     function sortShapes(string[] memory inputShapes) public view shapeArrayChecker(inputShapes) shapeArrayLimit(inputShapes) returns(string[] memory){
         uint[] memory sortedShapeSides = new uint[](inputShapes.length);
