@@ -128,9 +128,18 @@ contract shapes{
         return (sides == shape_number[shape])? true:false;
     }
 
+
+
+    function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
+        return (sides - 2) * 180 / sides;
+    }
+
+
     function areaTriangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
         return base * height * 1 / 2;
     }
+
+    
 
     function areaRectangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
         return base * height;
@@ -140,13 +149,7 @@ contract shapes{
         return uint(side ** 2);
     }      
 
-    function volumeCube(uint side)public pure isPositive1(side) returns(uint){
-        return side ** 3;
-    }   
-
-    function volumeCuboid(int height, int width, int depth) public pure isPositive3(height, width, depth) returns(uint){
-        return uint(height * width * depth); 
-    }
+  
 
     function sortShapes(string[] memory inputShapes) public view shapeArrayChecker(inputShapes) shapeArrayLimit(inputShapes) returns(string[] memory){
         uint[] memory sortedShapeSides = new uint[](inputShapes.length);
