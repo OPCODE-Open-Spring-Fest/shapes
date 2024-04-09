@@ -32,7 +32,7 @@ contract shapes{
         int found=0;
         for(uint i=0;i<9;i++)
         {
-            if(compareStrings(name[i],s))
+            if(compareStrings(name[i],toLowercase(s)))
             {
                 found++;
                 break;
@@ -78,7 +78,7 @@ contract shapes{
     }
     
     modifier shapeChecker(string memory shape){
-        bool isPresent = (shape_number[shape] == 0)? false:true;
+        bool isPresent = (shape_number[toLowercase(shape)] == 0)? false:true;
         require(isPresent, "Input valid shape with 10 or less sides");
         _;
     }
@@ -86,7 +86,7 @@ contract shapes{
     modifier shapeArrayChecker(string[] memory shapeArray){
         bool areAllPresent = true;
         for(uint i=0; i<shapeArray.length; i++){
-            areAllPresent = (shape_number[shapeArray[i]] == 0)? false:true;
+            areAllPresent = (shape_number[toLowercase(shapeArray[i])] == 0)? false:true;
             if(!areAllPresent) break;
         }
         require(areAllPresent, "Invalid shape");
@@ -94,7 +94,7 @@ contract shapes{
     }
 
     function number_of_sides(string calldata s) external view check(s) returns (uint){
-        return shape_number[s];
+        return shape_number[toLowercase(s)];
     }
 
     function isTriangle(int side1, int side2, int side3) public pure isPositive3(side1, side2, side3) returns (bool) {
@@ -121,7 +121,7 @@ contract shapes{
     }
 
     function equal(uint sides, string memory shape) public view sidesLimit(sides) shapeChecker(shape) returns (bool){
-        return (sides == shape_number[shape])? true:false;
+        return (sides == shape_number[toLowercase(shape)])? true:false;
     }
 
     function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
@@ -147,6 +147,14 @@ contract shapes{
     function volumeCuboid(int height, int width, int depth) public pure isPositive3(height, width, depth) returns(uint){
         return uint(height * width * depth); 
     }
+    
+    function surfaceCube(uint side) public pure isPositive1(side) returns(uint){
+        return 6 * (side**2);
+    }
+
+    function surfaceCuboid(int height, int width, int depth) public pure isPositive3(height, width, depth) returns(uint){
+        return uint(2 * (height * width + height * depth + width * depth));
+    }
 
     function surfaceCube(uint side) public pure isPositive1(side) returns(uint){
         return 6 * (side**2);
@@ -161,6 +169,7 @@ contract shapes{
         string[] memory sortedShapes = new string[](inputShapes.length);
 
         for(uint i=0; i<inputShapes.length; ++i){
+            inputShapes[i] = toLowercase(inputShapes[i]);            
             sortedShapeSides[i] = shape_number[inputShapes[i]];
         }    
         for(uint i=0; i<=sortedShapeSides.length; ++i){
@@ -172,12 +181,21 @@ contract shapes{
                     sortedShapeSides[j] = store;
                 }
             }
-        
         }
         for(uint i=0; i<sortedShapeSides.length; ++i){
             sortedShapes[i] = name[sortedShapeSides[i] -1];
         }
         return sortedShapes;
     }
-}
 
+    function toLowercase(string memory str) public pure returns (string memory){
+        bytes memory strBytes = bytes(str);
+                    
+        for(uint i=0; i<strBytes.length; ++i){
+            if(uint8(strBytes[i]) >= 65 && uint8(strBytes[i]) <= 90 ){
+                strBytes[i] = bytes1(uint8(strBytes[i]) + 32);
+            }
+        }
+        return string(strBytes);
+    }
+}
