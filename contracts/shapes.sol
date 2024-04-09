@@ -1,3 +1,4 @@
+
 // SPDX-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 contract shapes{
@@ -21,7 +22,6 @@ contract shapes{
          shape_number["decagon"]=10;
 
     }
-
 
      // this function compareStrings is used to compare two strings
     function compareStrings(string memory a, string memory b) internal pure returns (bool) {
@@ -116,10 +116,6 @@ contract shapes{
         else return "Isosceles";
     }
 
-    function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
-        return (sides - 2) * 180 / sides;
-    }
-
     function checkShape(uint sides) public view sidesLimit(sides) returns(string memory){
         return name[sides-1];
     }
@@ -128,18 +124,13 @@ contract shapes{
         return (sides == shape_number[shape])? true:false;
     }
 
-
-
     function interiorAngle(uint sides) public pure sidesLimitAngle(sides) returns(uint){
         return (sides - 2) * 180 / sides;
     }
 
-
     function areaTriangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
         return base * height * 1 / 2;
     }
-
-    
 
     function areaRectangle(uint base, uint height)public pure isPositive2(base, height) returns(uint){
         return base * height;
@@ -149,7 +140,21 @@ contract shapes{
         return uint(side ** 2);
     }      
 
-  
+    function volumeCube(uint side)public pure isPositive1(side) returns(uint){
+        return side ** 3;
+    }   
+
+    function volumeCuboid(int height, int width, int depth) public pure isPositive3(height, width, depth) returns(uint){
+        return uint(height * width * depth); 
+    }
+
+    function surfaceCube(uint side) public pure isPositive1(side) returns(uint){
+        return 6 * (side**2);
+    }
+
+    function surfaceCuboid(int height, int width, int depth) public pure isPositive3(height, width, depth) returns(uint){
+        return uint(2 * (height * width + height * depth + width * depth));
+    }
 
     function sortShapes(string[] memory inputShapes) public view shapeArrayChecker(inputShapes) shapeArrayLimit(inputShapes) returns(string[] memory){
         uint[] memory sortedShapeSides = new uint[](inputShapes.length);
